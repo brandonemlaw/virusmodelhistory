@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" >
+  <head>
+    <meta name="viewport" content="width=device-width">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Virus Model History</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.1/moment.min.js" integrity="sha256-epLhbUf8psw8cUHu0hJ5eabk6CPexNJpCbsc0q4ougI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha256-TQq84xX6vkwR0Qs1qH5ADkP+MvH0W+9E7TdHJsoIQiM=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+    <link href="./main.css" media="screen" rel="stylesheet" type="text/css" />
+
+    <script src="scripts/utilities.js"></script>
+    <script src="scripts/states.js"></script>
+    <script src="scripts/main.js"></script>
+</head>
+
+  <body> 
+    <canvas id="chartCanvas"></canvas>
+    
+    <div class="row">
+      <div class="card col-md" id="addDataCard">
+        <div class="card-body">
+          <h5 class="card-title">Add Data</h5>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect02">Model Projection From</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect02">
+              <option selected>Latest</option>
+              <option value="2020-04-27">2020-04-27</option>
+            </select>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect02">Data Projected</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect02">
+              <option selected>Select...</option>
+              <option value="totdea">Total Covid Deaths</option>
+              <option value="Deaths">New Covid Deaths</option>
+              <option value="allbed">Covid Beds</option>
+              <option value="ICUbed">ICU Covid Beds</option>
+              <option value="InvVen">Invasive Ventilation</option>
+              <option value="admis">Hospital Admissions</option>
+              <option value="bedover">Beds Over</option>
+              <option value="icubedover">ICU Beds Over</option>
+            </select>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect02">Projection Type</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect02">
+              <option selected>Select...</option>
+              <option value="mean">Average</option>
+              <option value="upper">Maximum</option>
+              <option value="lower">Minimum</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card col-sm" id="settingsCard">
+        <div class="card-body">
+          <h5 class="card-title">Settings</h5>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" id="radio-us" checked="checked">
+              </div>
+            </div>
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                United States
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" id="radio-states">
+              </div>
+            </div>
+            <button class="btn btn-secondary dropdown-toggle" type="button" 
+                    id="dropdownMenu1" data-toggle="dropdown" 
+                    aria-haspopup="true" aria-expanded="true">
+              <i class="glyphicon glyphicon-cog"></i>
+              States<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu checkbox-menu allow-focus"
+            id="stateDropDown">
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
