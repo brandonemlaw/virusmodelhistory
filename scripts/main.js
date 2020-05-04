@@ -118,11 +118,17 @@ function parseIhmeCsv(text, location, projectionBegins)
 
 
 //Handle Settings Changes
+function onRadioStatesChanged()
+{
+    $('#radio-us').prop("checked", false);
 
+}
 
+function onRadioUsChanged()
+{
+    $('#radio-states').prop("checked", false);
 
-
-
+}
 
 
 //Setup drop down menu
@@ -140,7 +146,6 @@ function addStates()
     html = html + "<li><label onClick='checkStates(false);'>Uncheck All</label><li>";
     for (var abbrev in states)
     {
-        console.log(states[abbrev]);
         html = html +  
         '<li><label><input type="checkbox" id="chk-' +
         abbrev + '" checked="false">' + states[abbrev] + '</label></li>';
@@ -152,7 +157,6 @@ function checkStates(isChecked)
 {
     for (var abbrev in states)
     {
-        console.log(abbrev);
         $('#chk-' + abbrev).prop("checked", isChecked);
     }
 }
